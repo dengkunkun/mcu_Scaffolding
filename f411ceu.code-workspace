@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.urdf": "xml",
+			"core_armv8mml.h": "c"
+		}
+	}
+}
