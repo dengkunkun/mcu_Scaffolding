@@ -71,16 +71,6 @@ void userTaskCb(void *argument);
 
 /* USER CODE BEGIN PFP */
 
-
-void my_printf(const char *format, ...) {
-    char buffer[100];  // Adjust buffer size as needed
-    va_list args;
-    va_start(args, format);
-    vsnprintf(buffer, sizeof(buffer), format, args);
-    va_end(args);
-    HAL_UART_Transmit(&huart1, (uint8_t *)buffer, strlen(buffer), HAL_MAX_DELAY);
-}
-
 #ifdef __GNUC__
   /* With GCC, small printf (option LD Linker->Libraries->Small printf
      set to 'Yes') calls __io_putchar() */
