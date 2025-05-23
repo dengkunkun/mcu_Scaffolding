@@ -20,7 +20,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
-
+#include "stdint.h"
+#include "stdio.h"
+#include "string.h"
+#include "stdarg.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 // #include "core_armv8mml.h"
@@ -67,13 +70,36 @@ void StartDefaultTask(void *argument);
 void userTaskCb(void *argument);
 
 /* USER CODE BEGIN PFP */
-void ITM_print(char *str)
+
+
+void my_printf(const char *format, ...) {
+    char buffer[100];  // Adjust buffer size as needed
+    va_list args;
+    va_start(args, format);
+    vsnprintf(buffer, sizeof(buffer), format, args);
+    va_end(args);
+    HAL_UART_Transmit(&huart1, (uint8_t *)buffer, strlen(buffer), HAL_MAX_DELAY);
+}
+
+#ifdef __GNUC__
+  /* With GCC, small printf (option LD Linker->Libraries->Small printf
+     set to 'Yes') calls __io_putchar() */
+  #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#else
+  #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#endif /* __GNUC__ */
+
+/**
+  * @brief  Retargets the C library printf function to the USART.
+  * @param  None
+  * @retval None
+  */
+PUTCHAR_PROTOTYPE
 {
-  while (*str != '\0')
-  {
-    ITM_SendChar(*str);
-    str++;
-  }
+  /* Place your implementation of fputc here */
+  /* e.g. write a character to the USART1 and Loop until the end of transmission */
+  HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+  return ch;
 }
 
 /* USER CODE END PFP */
@@ -106,14 +132,15 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
+  
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  volatile uint32_t freq=HAL_RCC_GetSysClockFreq();
+  printf("System Clock Frequency: %u Hz\n", freq);
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -300,7 +327,7 @@ void userTaskCb(void *argument)
   for (;;)
   {
     osDelay(1000);
-    ITM_print("Hello World!\r\n");
+    printf("Hello World!\r\n");
   }
   /* USER CODE END userTaskCb */
 }

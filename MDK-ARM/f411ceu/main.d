@@ -40,3 +40,6 @@ f411ceu\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.
 f411ceu\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 f411ceu\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
 f411ceu\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
+f411ceu\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+f411ceu\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+f411ceu\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
