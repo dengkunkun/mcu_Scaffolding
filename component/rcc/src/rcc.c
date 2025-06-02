@@ -73,35 +73,35 @@ void PrintSystemClockInfo(void)
   }
   
   // 打印所有信息
-  printf("\n========== System Clock Information ==========\n");
-  printf("Clock Source    : %s\n", clock_source_str);
-  printf("SYSCLK Frequency: %lu Hz (%.2f MHz)\n", sysclk_freq, (float)sysclk_freq/1000000.0f);
-  printf("HCLK Frequency  : %lu Hz (%.2f MHz)\n", hclk_freq, (float)hclk_freq/1000000.0f);
-  printf("PCLK1 Frequency : %lu Hz (%.2f MHz)\n", pclk1_freq, (float)pclk1_freq/1000000.0f);
-  printf("PCLK2 Frequency : %lu Hz (%.2f MHz)\n", pclk2_freq, (float)pclk2_freq/1000000.0f);
-  printf("Voltage Scale   : %s\n", voltage_str);
+  printf("\r\n========== System Clock Information ==========\r\n");
+  printf("Clock Source    : %s\r\n", clock_source_str);
+  printf("SYSCLK Frequency: %lu Hz (%.2f MHz)\r\n", sysclk_freq, (float)sysclk_freq/1000000.0f);
+  printf("HCLK Frequency  : %lu Hz (%.2f MHz)\r\n", hclk_freq, (float)hclk_freq/1000000.0f);
+  printf("PCLK1 Frequency : %lu Hz (%.2f MHz)\r\n", pclk1_freq, (float)pclk1_freq/1000000.0f);
+  printf("PCLK2 Frequency : %lu Hz (%.2f MHz)\r\n", pclk2_freq, (float)pclk2_freq/1000000.0f);
+  printf("Voltage Scale   : %s\r\n", voltage_str);
   
   // 检查电压调节器状态
   if(__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY))
   {
-    printf("Voltage Status  : Ready\n");
+    printf("Voltage Status  : Ready\r\n");
   }
   else
   {
-    printf("Voltage Status  : Not Ready\n");
+    printf("Voltage Status  : Not Ready\r\n");
   }
   
   // 如果使用PLL，显示PLL配置
   if(sysclk_source == RCC_SYSCLKSOURCE_STATUS_PLLCLK)
   {
-    printf("PLL Configuration:\n");
-    printf("  PLLM: %lu\n", (RCC->PLLCFGR & RCC_PLLCFGR_PLLM) >> RCC_PLLCFGR_PLLM_Pos);
-    printf("  PLLN: %lu\n", (RCC->PLLCFGR & RCC_PLLCFGR_PLLN) >> RCC_PLLCFGR_PLLN_Pos);
-    printf("  PLLP: %lu\n", ((RCC->PLLCFGR & RCC_PLLCFGR_PLLP) >> RCC_PLLCFGR_PLLP_Pos) + 1);
-    printf("  PLLQ: %lu\n", (RCC->PLLCFGR & RCC_PLLCFGR_PLLQ) >> RCC_PLLCFGR_PLLQ_Pos);
+    printf("PLL Configuration:\r\n");
+    printf("  PLLM: %lu\r\n", (RCC->PLLCFGR & RCC_PLLCFGR_PLLM) >> RCC_PLLCFGR_PLLM_Pos);
+    printf("  PLLN: %lu\r\n", (RCC->PLLCFGR & RCC_PLLCFGR_PLLN) >> RCC_PLLCFGR_PLLN_Pos);
+    printf("  PLLP: %lu\r\n", ((RCC->PLLCFGR & RCC_PLLCFGR_PLLP) >> RCC_PLLCFGR_PLLP_Pos) + 1);
+    printf("  PLLQ: %lu\r\n", (RCC->PLLCFGR & RCC_PLLCFGR_PLLQ) >> RCC_PLLCFGR_PLLQ_Pos);
   }
   
-  printf("==============================================\n\n");
+  printf("==============================================\r\n\r\n");
 }
 
 static void SystemClockHSI_Config(int m, int n, int p, int q)

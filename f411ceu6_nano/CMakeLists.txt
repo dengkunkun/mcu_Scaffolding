@@ -39,6 +39,8 @@ add_executable(${CMAKE_PROJECT_NAME})
 
 add_subdirectory(../component/rcc rcc_build
 )
+add_subdirectory(../component/log log_build
+)
 # Add STM32CubeMX generated sources
 add_subdirectory(cmake/stm32cubemx)
 
@@ -66,5 +68,6 @@ target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
 target_link_libraries(${CMAKE_PROJECT_NAME}
     stm32cubemx
     rcc
+    log
     # Add user defined libraries
 )

@@ -33,3 +33,16 @@ else
 fi
 
 # cmake -G "Ninja" ../f411ceu6_nano && ninja && arm-none-eabi-objcopy -O ihex f411ceu6_nano.elf f411ceu6_nano.hex && openocd -f interface/cmsis-dap.cfg -f target/stm32f4x.cfg -c "program f411ceu6_nano.hex verify reset exit"
+
+# 调试
+# openocd -f interface/cmsis-dap.cfg -f target/stm32f4x.cfg
+
+# # 启动GDB并连接到OpenOCD
+# arm-none-eabi-gdb build/f411ceu6_nano.elf
+
+# # 在GDB命令行中：
+# (gdb) target extended-remote localhost:3333
+# (gdb) monitor reset halt
+# (gdb) info registers
+# (gdb) break main
+# (gdb) continue
