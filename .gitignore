@@ -1,0 +1,140 @@
+# Build directories
+build/
+**/build/
+cmake-build-*/
+out/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+!cmake/gcc-arm-none-eabi.cmake
+
+# Project specific excludes
+f411ceu6_nano/cmake/
+f411ceu6_nano/Drivers/
+f411ceu6_nano/Middlewares/
+
+# STM32CubeMX generated files (optional - see note below)
+# f411ceu6_nano/Core/Inc/
+# f411ceu6_nano/Core/Src/
+# *.ioc
+
+# Compiled binaries
+*.bin
+*.hex
+*.elf
+*.map
+*.list
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.exe
+
+# Debug files
+*.d
+*.su
+*.dSYM/
+*.pdb
+
+# IDE specific files
+# Visual Studio Code
+.vscode/
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Keil MDK
+*.uvguix.*
+*.uvoptx
+*.uvprojx
+*.scvd
+*.axf
+*.htm
+*.lnp
+*.sct
+*.tra
+*.dep
+JLinkSettings.ini
+
+# IAR
+*.eww
+*.ewd
+*.ewp
+*.wsdt
+*.dni
+*.wspos
+*.project.cspy.bat
+settings/
+
+# STM32CubeIDE / Eclipse
+.metadata/
+.project
+.cproject
+.settings/
+Debug/
+Release/
+
+# GCC/Make
+*.i*86
+*.x86_64
+*.hex
+
+# Temporary files
+*~
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+*.orig
+
+# Log files
+*.log
+
+# OS generated files
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# Git
+*.orig
+*.rej
+
+# JLink
+JLinkLog.txt
+JLinkSettings.ini
+
+# OpenOCD
+openocd.log
+
+# Compilation database
+compile_commands.json
