@@ -41,6 +41,9 @@ add_subdirectory(../component/rcc rcc_build
 )
 add_subdirectory(../component/log log_build
 )
+add_subdirectory(../component/shell shell_build
+)
+
 # Add STM32CubeMX generated sources
 add_subdirectory(cmake/stm32cubemx)
 
@@ -69,5 +72,6 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     stm32cubemx
     rcc
     log
+    shell
     # Add user defined libraries
 )

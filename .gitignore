@@ -3,6 +3,9 @@ build/
 **/build/
 cmake-build-*/
 out/
+ThirtParty
+temp
+
 
 # CMake generated files
 CMakeCache.txt

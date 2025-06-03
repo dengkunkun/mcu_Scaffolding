@@ -28,7 +28,7 @@
 
 #ifndef _ELOG_CFG_H_
 #define _ELOG_CFG_H_
-#pragma message("elog_cfg.h is included, please check the configuration carefully.")
+// #pragma message("elog_cfg.h is included, please check the configuration carefully.")
 /*---------------------------------------------------------------------------*/
 /* enable log output. */
 #define ELOG_OUTPUT_ENABLE

@@ -156,14 +156,14 @@ static void SystemClockHSI_Config(int m, int n, int p, int q)
   }
 
   /* -4- Optional: Disable HSE bypass Oscillator (if the HSE bypass is no more needed by the application) */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_OFF;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
-  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
-    /* Initialization Error */
-    Error_Handler();
-  }
+  // RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  // RCC_OscInitStruct.HSEState = RCC_HSE_OFF;
+  // RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  // if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  // {
+  //   /* Initialization Error */
+  //   Error_Handler();
+  // }
   if(PWR_REGULATOR_VOLTAGE_SCALE1!=HAL_PWREx_GetVoltageRange())
   {
     /* Initialization Error */
