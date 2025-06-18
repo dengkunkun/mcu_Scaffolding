@@ -1,0 +1,6 @@
+[submodule "ThirdParty/lwshell"]
+	path = ThirdParty/lwshell
+	url = https://github.com/MaJerle/lwshell.git
+[submodule "ThirdParty/EasyLogger"]
+	path = ThirdParty/EasyLogger
+	url = https://github.com/armink/EasyLogger.git
