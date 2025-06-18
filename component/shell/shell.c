@@ -32,8 +32,6 @@ int32_t mycmd_fn(int32_t argc, char **argv)
 /* Example code */
 void shell_init(void)
 {
-    const char *input_str = "mycmd param1 \"param 2 with space\"\r\n";
-
     /* Init library */
     lwshell_init();
 

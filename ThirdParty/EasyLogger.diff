@@ -1,0 +1,39 @@
+diff --git a/easylogger/inc/elog.h b/easylogger/inc/elog.h
+index adde47c..7aff3c7 100755
+--- a/easylogger/inc/elog.h
++++ b/easylogger/inc/elog.h
+@@ -62,10 +62,10 @@ extern "C" {
+     if (!(EXPR))                                                              \
+     {                                                                         \
+         if (elog_assert_hook == NULL) {                                       \
+-            elog_a("elog", "(%s) has assert failed at %s:%ld.", #EXPR, __FUNCTION__, __LINE__); \
++            elog_a("elog", "(%s) has assert failed at %s:%ld.", #EXPR, __func__, __LINE__); \
+             while (1);                                                        \
+         } else {                                                              \
+-            elog_assert_hook(#EXPR, __FUNCTION__, __LINE__);                  \
++            elog_assert_hook(#EXPR, __func__, __LINE__);                  \
+         }                                                                     \
+     }
+ #else
+@@ -83,7 +83,7 @@ extern "C" {
+ #else /* ELOG_OUTPUT_ENABLE */
+ 
+     #ifdef ELOG_FMT_USING_FUNC
+-    #define ELOG_OUTPUT_FUNC __FUNCTION__
++    #define ELOG_OUTPUT_FUNC __func__
+     #else
+     #define ELOG_OUTPUT_FUNC NULL
+     #endif
+diff --git a/easylogger/src/elog.c b/easylogger/src/elog.c
+index b3a00e3..41c6517 100644
+--- a/easylogger/src/elog.c
++++ b/easylogger/src/elog.c
+@@ -644,7 +644,7 @@ void elog_output(uint8_t level, const char *tag, const char *file, const char *f
+             if (get_fmt_used_and_enabled_ptr(level, ELOG_FMT_FUNC, func)) {
+                 log_len += elog_strcpy(log_len, log_buf + log_len, ":");
+             } else if (get_fmt_used_and_enabled_u32(level, ELOG_FMT_LINE, line)) {
+-                log_len += elog_strcpy(log_len, log_buf + log_len, " ");
++                log_len += elog_strcpy(log_len, log_buf + log_len, ":");
+             }
+         }
+         /* package line info */

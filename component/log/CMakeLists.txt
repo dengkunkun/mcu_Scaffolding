@@ -13,14 +13,14 @@ target_sources(${LOG_COMPONENT_NAME} PRIVATE
     src/elog_port.c
     
     # EasyLogger核心源文件
-    ../../ThirtParty/EasyLogger/easylogger/src/elog.c
-    ../../ThirtParty/EasyLogger/easylogger/src/elog_utils.c
-    ../../ThirtParty/EasyLogger/easylogger/src/elog_buf.c
+    ../../ThirdParty/EasyLogger/easylogger/src/elog.c
+    ../../ThirdParty/EasyLogger/easylogger/src/elog_utils.c
+    ../../ThirdParty/EasyLogger/easylogger/src/elog_buf.c
 
     
     # 根据配置添加异步和缓冲模块（可选）
-    # ../../ThirtParty/EasyLogger/easylogger/src/elog_async.c
-    # ../../ThirtParty/EasyLogger/easylogger/src/elog_buf.c
+    # ../../ThirdParty/EasyLogger/easylogger/src/elog_async.c
+    # ../../ThirdParty/EasyLogger/easylogger/src/elog_buf.c
 )
 
 # 设置头文件包含路径
@@ -28,7 +28,7 @@ target_include_directories(${LOG_COMPONENT_NAME} PUBLIC
     # 对外公开的头文件目录
     include 
     src
-    ../../ThirtParty/EasyLogger/easylogger/inc
+    ../../ThirdParty/EasyLogger/easylogger/inc
 )
 
 # 设置私有头文件包含路径
@@ -37,7 +37,7 @@ target_include_directories(${LOG_COMPONENT_NAME} PUBLIC
 #     src
     
 #     # EasyLogger头文件目录
-#     ../../ThirtParty/EasyLogger/easylogger/inc
+#     ../../ThirdParty/EasyLogger/easylogger/inc
 # )
 
 # 编译定义
@@ -62,7 +62,7 @@ target_include_directories(${LOG_COMPONENT_NAME} PUBLIC
 option(ELOG_ASYNC_ENABLE "Enable EasyLogger async output" OFF)
 if(ELOG_ASYNC_ENABLE)
     target_sources(${LOG_COMPONENT_NAME} PRIVATE
-        ../../ThirtParty/EasyLogger/easylogger/src/elog_async.c
+        ../../ThirdParty/EasyLogger/easylogger/src/elog_async.c
     )
     target_compile_definitions(${LOG_COMPONENT_NAME} PUBLIC
         ELOG_ASYNC_OUTPUT_ENABLE=1
@@ -74,11 +74,11 @@ endif()
 option(ELOG_FILE_ENABLE "Enable EasyLogger file plugin" OFF)
 if(ELOG_FILE_ENABLE)
     target_sources(${LOG_COMPONENT_NAME} PRIVATE
-        ../../ThirtParty/EasyLogger/easylogger/plugins/file/elog_file.c
-        ../../ThirtParty/EasyLogger/easylogger/plugins/file/elog_file_port.c
+        ../../ThirdParty/EasyLogger/easylogger/plugins/file/elog_file.c
+        ../../ThirdParty/EasyLogger/easylogger/plugins/file/elog_file_port.c
     )
     target_include_directories(${LOG_COMPONENT_NAME} PUBLIC
-        ../../ThirtParty/EasyLogger/easylogger/plugins/file
+        ../../ThirdParty/EasyLogger/easylogger/plugins/file
     )
     target_compile_definitions(${LOG_COMPONENT_NAME} PUBLIC
         ELOG_FILE_ENABLE=1
@@ -89,11 +89,11 @@ endif()
 option(ELOG_FLASH_ENABLE "Enable EasyLogger flash plugin" OFF)
 if(ELOG_FLASH_ENABLE)
     target_sources(${LOG_COMPONENT_NAME} PRIVATE
-        ../../ThirtParty/EasyLogger/easylogger/plugins/flash/elog_flash.c
-        ../../ThirtParty/EasyLogger/easylogger/plugins/flash/elog_flash_port.c
+        ../../ThirdParty/EasyLogger/easylogger/plugins/flash/elog_flash.c
+        ../../ThirdParty/EasyLogger/easylogger/plugins/flash/elog_flash_port.c
     )
     target_include_directories(${LOG_COMPONENT_NAME} PUBLIC
-        ../../ThirtParty/EasyLogger/easylogger/plugins/flash
+        ../../ThirdParty/EasyLogger/easylogger/plugins/flash
     )
     target_compile_definitions(${LOG_COMPONENT_NAME} PUBLIC
         ELOG_FLASH_ENABLE=1

@@ -1,11 +1,19 @@
 # Build directories
 build/
 **/build/
+**/cmake/
+**/Drivers/
+**/Middlewares/
+**/.mxproject
+**/CMakePresets.json
+**/newlib_lock_glue.c
 cmake-build-*/
 out/
-ThirtParty
+ThirdParty/**/*
+!ThirdParty/**/*.diff
+!ThirdParty/**/*.patch
 temp
-
+component/bsp/
 
 # CMake generated files
 CMakeCache.txt
@@ -17,9 +25,6 @@ Makefile
 !cmake/gcc-arm-none-eabi.cmake
 
 # Project specific excludes
-f411ceu6_nano/cmake/
-f411ceu6_nano/Drivers/
-f411ceu6_nano/Middlewares/
 
 # STM32CubeMX generated files (optional - see note below)
 # f411ceu6_nano/Core/Inc/

@@ -23,12 +23,12 @@ extern "C" {
 #define LOG_VERBOSE ELOG_LVL_VERBOSE
 
 /* 便捷的日志宏定义 */
-#define loga(...)   elog_a(__FUNCTION__, __VA_ARGS__)
-#define loge(...)   elog_e(__FUNCTION__, __VA_ARGS__)
-#define logw(...)   elog_w(__FUNCTION__, __VA_ARGS__)
-#define logi(...)   elog_i(__FUNCTION__, __VA_ARGS__)
-#define logd(...)   elog_d(__FUNCTION__, __VA_ARGS__)
-#define logv(...)   elog_v(__FUNCTION__, __VA_ARGS__)
+#define loga(...)   elog_a(__func__, __VA_ARGS__)
+#define loge(...)   elog_e(__func__, __VA_ARGS__)
+#define logw(...)   elog_w(__func__, __VA_ARGS__)
+#define logi(...)   elog_i(__func__, __VA_ARGS__)
+#define logd(...)   elog_d(__func__, __VA_ARGS__)
+#define logv(...)   elog_v(__func__, __VA_ARGS__)
 
 /* 原始输出宏（不带级别格式） */
 #define log_raw(...)      elog_raw(__VA_ARGS__)

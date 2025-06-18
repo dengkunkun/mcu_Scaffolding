@@ -18,9 +18,17 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Debug")
 endif()
 
+set(MCU_FAMILY "STM32F4")
+set(MCU_TYPE "STM32F411xE")
+
 # Set the project name
 set(CMAKE_PROJECT_NAME f411ceu6_nano)
 
+add_library(mcu_config INTERFACE)
+target_compile_definitions(mcu_config INTERFACE
+    ${MCU_TYPE}                    # STM32F411xE
+    ${MCU_FAMILY}                  # STM32F4
+)
 # Include toolchain file
 include("cmake/gcc-arm-none-eabi.cmake")
 
@@ -69,6 +77,7 @@ target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
 
 # Add linked libraries
 target_link_libraries(${CMAKE_PROJECT_NAME}
+    mcu_config
     stm32cubemx
     rcc
     log

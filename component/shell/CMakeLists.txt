@@ -7,7 +7,7 @@ set(SHELL_COMPONENT_NAME shell)
 add_library(${SHELL_COMPONENT_NAME} STATIC)
 
 # 修正：为out-of-tree源目录指定二进制目录
-add_subdirectory(../../ThirtParty/lwshell/lwshell ${CMAKE_CURRENT_BINARY_DIR}/lwshell)
+add_subdirectory(../../ThirdParty/lwshell/lwshell ${CMAKE_CURRENT_BINARY_DIR}/lwshell)
 
 # 设置源文件
 target_sources(${SHELL_COMPONENT_NAME} PRIVATE
@@ -19,7 +19,7 @@ target_sources(${SHELL_COMPONENT_NAME} PRIVATE
 target_include_directories(${SHELL_COMPONENT_NAME} PUBLIC
     # 对外公开的头文件目录
     .                                                    # 当前目录
-    ../../ThirtParty/lwshell/lwshell/src                # lwshell头文件
+    ../../ThirdParty/lwshell/lwshell/src                # lwshell头文件
 )
 
 # 链接lwshell库
