@@ -22,6 +22,10 @@ while [[ $# -gt 0 ]]; do
             MCU_TYPE="h743"
             shift
             ;;
+        h753|H753)
+            MCU_TYPE="h753"
+            shift
+            ;;
         -r|--rebuild)
             REBUILD=true
             shift
@@ -78,6 +82,13 @@ case $MCU_TYPE in
         OPENOCD_INTERFACE="interface/stlink.cfg"
         OPENOCD_TARGET="target/stm32h7x.cfg"
         echo "=== 构建STM32H743VIT6项目 ==="
+        ;;
+    h753)
+        PROJECT_DIR="h753_alitek"
+        PROJECT_NAME="h753_alitek"
+        OPENOCD_INTERFACE="interface/stlink.cfg"
+        OPENOCD_TARGET="target/stm32h7x.cfg"
+        echo "=== 构建STM32H753IIT6项目 ==="
         ;;
 esac
 

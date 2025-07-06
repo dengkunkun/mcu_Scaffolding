@@ -1,12 +1,21 @@
 [submodule "ThirdParty/lwshell"]
 	path = ThirdParty/lwshell
 	url = https://github.com/MaJerle/lwshell.git
-[submodule "ThirdParty/EasyLogger"]
-	path = ThirdParty/EasyLogger
-	url = https://github.com/armink/EasyLogger.git
 [submodule "ThirdParty/lwwdg"]
 	path = ThirdParty/lwwdg
 	url = https://github.com/MaJerle/lwwdg.git
 [submodule "ThirdParty/lwevt"]
 	path = ThirdParty/lwevt
 	url = https://github.com/MaJerle/lwevt.git
+[submodule "ThirdParty/led_indicator"]
+	path = ThirdParty/led_indicator
+	url = https://github.com/dengkunkun/led_indicator.git
+[submodule "ThirdParty/EasyLogger"]
+	path = ThirdParty/EasyLogger
+	url = https://github.com/armink/EasyLogger.git
+[submodule "ThirdParty/lwbtn"]
+	path = ThirdParty/lwbtn
+	url = https://github.com/MaJerle/lwbtn.git
+[submodule "ThirdParty/lwutil"]
+	path = ThirdParty/lwutil
+	url = https://github.com/MaJerle/lwutil.git

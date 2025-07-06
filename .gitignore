@@ -9,9 +9,9 @@ build/
 **/newlib_lock_glue.c
 cmake-build-*/
 out/
-ThirdParty/**/*
-!ThirdParty/**/*.diff
-!ThirdParty/**/*.patch
+# ThirdParty/**/*
+# !ThirdParty/**/*.diff
+# !ThirdParty/**/*.patch
 temp
 component/bsp/
 
