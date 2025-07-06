@@ -4,3 +4,9 @@
 [submodule "ThirdParty/EasyLogger"]
 	path = ThirdParty/EasyLogger
 	url = https://github.com/armink/EasyLogger.git
+[submodule "ThirdParty/lwwdg"]
+	path = ThirdParty/lwwdg
+	url = https://github.com/MaJerle/lwwdg.git
+[submodule "ThirdParty/lwevt"]
+	path = ThirdParty/lwevt
+	url = https://github.com/MaJerle/lwevt.git
