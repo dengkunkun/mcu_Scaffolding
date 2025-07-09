@@ -1,0 +1,237 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug STM32F411 (CMSIS-DAP)",
+            "cwd": "${workspaceFolder}/f411ceu6_nano",
+            "executable": "${workspaceFolder}/f411ceu6_nano/build/f411ceu6_nano.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "parsed",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/cmsis-dap.cfg",
+                "target/stm32f4x.cfg"
+            ],
+            "searchDir": [],
+            "openOCDLaunchCommands": [
+                "init",
+                "reset halt"
+            ],
+            "svdFile": "${workspaceFolder}/.vscode/svd/STM32F411.svd",
+            "preLaunchTask": "Build F411",
+            "postLaunchCommands": [
+                "monitor reset halt",
+                "break main",
+                "continue"
+            ]
+        },
+        {
+            "name": "Debug STM32H743 (ST-Link)",
+            "cwd": "${workspaceFolder}/h743vit6_mini",
+            "executable": "${workspaceFolder}/h743vit6_mini/build/h743vit6_mini.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "parsed",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32h7x.cfg"
+            ],
+            "searchDir": [],
+            "openOCDLaunchCommands": [
+                "init",
+                "reset halt"
+            ],
+            "svdFile": "${workspaceFolder}/.vscode/svd/STM32H743.svd",
+            "preLaunchTask": "Build H743",
+            "postLaunchCommands": [
+                "monitor reset halt",
+                "break main",
+                "continue"
+            ]
+        },
+        {
+            "name": "Debug STM32H753 (ST-Link)",
+            "cwd": "${workspaceFolder}/h753_alitek",
+            "executable": "${workspaceFolder}/h753_alitek/build/h753_alitek.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "parsed",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32h7x.cfg"
+            ],
+            "searchDir": [],
+            "openOCDLaunchCommands": [
+                "set WORKAREASIZE 0x8000",
+                "adapter speed 1000",
+                "init",
+                "reset halt",
+                "flash write_image erase build/h753_alitek.elf",
+                "reset halt"
+            ],
+            "svdFile": "${workspaceFolder}/.vscode/svd/STM32H753.svd",
+            "preLaunchTask": "Build H753",
+            "postLaunchCommands": [
+                "monitor reset halt",
+                "load",
+                "monitor reset halt",
+                "break main",
+                "continue"
+            ],
+            "overrideLaunchCommands": [
+                "monitor reset halt",
+                "load",
+                "monitor reset halt"
+            ]
+        },
+        {
+            "name": "Debug STM32H753 (No Flash)",
+            "cwd": "${workspaceFolder}/h753_alitek",
+            "executable": "${workspaceFolder}/h753_alitek/build/h753_alitek.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "parsed",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32h7x.cfg"
+            ],
+            "searchDir": [],
+            "openOCDLaunchCommands": [
+                "set WORKAREASIZE 0x8000",
+                "adapter speed 1000",
+                "init",
+                "reset halt"
+            ],
+            "svdFile": "${workspaceFolder}/.vscode/svd/STM32H753.svd",
+            "postLaunchCommands": [
+                "monitor reset halt",
+                "break main",
+                "continue"
+            ]
+        },
+        {
+            "name": "Attach STM32F411 (Running)",
+            "cwd": "${workspaceFolder}/f411ceu6_nano",
+            "executable": "${workspaceFolder}/f411ceu6_nano/build/f411ceu6_nano.elf",
+            "request": "attach",
+            "type": "cortex-debug",
+            "showDevDebugOutput": "parsed",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/cmsis-dap.cfg",
+                "target/stm32f4x.cfg"
+            ],
+            "searchDir": [],
+            "svdFile": "${workspaceFolder}/.vscode/svd/STM32F411.svd"
+        },
+        {
+            "name": "Attach STM32H743 (Running)",
+            "cwd": "${workspaceFolder}/h743vit6_mini",
+            "executable": "${workspaceFolder}/h743vit6_mini/build/h743vit6_mini.elf",
+            "request": "attach",
+            "type": "cortex-debug",
+            "showDevDebugOutput": "parsed",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32h7x.cfg"
+            ],
+            "searchDir": [],
+            "svdFile": "${workspaceFolder}/.vscode/svd/STM32H743.svd"
+        },
+        {
+            "name": "Attach STM32H753 (Running)",
+            "cwd": "${workspaceFolder}/h753_alitek",
+            "executable": "${workspaceFolder}/h753_alitek/build/h753_alitek.elf",
+            "request": "attach",
+            "type": "cortex-debug",
+            "showDevDebugOutput": "parsed",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32h7x.cfg"
+            ],
+            "searchDir": [],
+            "svdFile": "${workspaceFolder}/.vscode/svd/STM32H753.svd"
+        },
+        {
+            "name": "Debug STM32H753 (Simple)",
+            "cwd": "${workspaceFolder}/h753_alitek",
+            "executable": "${workspaceFolder}/h753_alitek/build/h753_alitek.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "parsed",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32h7x.cfg"
+            ],
+            "searchDir": [],
+            "openOCDLaunchCommands": [
+                "adapter speed 950",
+                "init",
+                "sleep 200"
+            ],
+            "svdFile": "${workspaceFolder}/.vscode/svd/STM32H753.svd",
+            "postLaunchCommands": [
+                "monitor sleep 200",
+                "break main",
+                "continue"
+            ]
+        },
+        {
+            "name": "Debug STM32H753 (Connect Under Reset)",
+            "cwd": "${workspaceFolder}/h753_alitek",
+            "executable": "${workspaceFolder}/h753_alitek/build/h753_alitek.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "parsed",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32h7x.cfg"
+            ],
+            "searchDir": [],
+            "openOCDLaunchCommands": [
+                "adapter speed 950",
+                "set CONNECT_UNDER_RESET 1",
+                "init"
+            ],
+            "svdFile": "${workspaceFolder}/.vscode/svd/STM32H753.svd",
+            "postLaunchCommands": [
+                "monitor sleep 200",
+                "break main",
+                "continue"
+            ]
+        },
+        {
+            "name": "Debug STM32H753 (Custom Config)",
+            "cwd": "${workspaceFolder}/h753_alitek",
+            "executable": "${workspaceFolder}/h753_alitek/build/h753_alitek.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "parsed",
+            "servertype": "openocd",
+            "configFiles": [
+                "${workspaceFolder}/.vscode/openocd-h753-custom.cfg"
+            ],
+            "searchDir": [],
+            "svdFile": "${workspaceFolder}/.vscode/svd/STM32H753.svd",
+            "postLaunchCommands": [
+                "break main",
+                "continue"
+            ]
+        }
+    ]
+}

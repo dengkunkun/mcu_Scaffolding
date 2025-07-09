@@ -1,0 +1,13 @@
+{
+    "recommendations": [
+        "ms-vscode.cpptools",
+        "marus25.cortex-debug",
+        "dan-c-underwood.arm",
+        "ms-vscode.cmake-tools",
+        "twxs.cmake",
+        "ms-vscode.vscode-embedded-tools",
+        "keroc.hex-fmt",
+        "zixuanwang.linkerscript",
+        "trond-snekvik.gnu-mapfiles"
+    ]
+}

@@ -1,0 +1,80 @@
+{
+    "configurations": [
+        {
+            "name": "STM32F411",
+            "includePath": [
+                "${workspaceFolder}/f411ceu6_nano/Core/Inc",
+                "${workspaceFolder}/f411ceu6_nano/Drivers/STM32F4xx_HAL_Driver/Inc",
+                "${workspaceFolder}/f411ceu6_nano/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy",
+                "${workspaceFolder}/f411ceu6_nano/Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+                "${workspaceFolder}/f411ceu6_nano/Drivers/CMSIS/Include",
+                "${workspaceFolder}/component/**",
+                "${workspaceFolder}/ThirdParty/**"
+            ],
+            "defines": [
+                "DEBUG",
+                "USE_HAL_DRIVER",
+                "STM32F411xE",
+                "STM32F4"
+            ],
+            "compilerPath": "arm-none-eabi-gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-arm",
+            "compileCommands": "${workspaceFolder}/f411ceu6_nano/build/compile_commands.json"
+        },
+        {
+            "name": "STM32H743",
+            "includePath": [
+                "${workspaceFolder}/h743vit6_mini/Core/Inc",
+                "${workspaceFolder}/h743vit6_mini/Drivers/STM32H7xx_HAL_Driver/Inc",
+                "${workspaceFolder}/h743vit6_mini/Drivers/STM32H7xx_HAL_Driver/Inc/Legacy",
+                "${workspaceFolder}/h743vit6_mini/Middlewares/Third_Party/FreeRTOS/Source/include",
+                "${workspaceFolder}/h743vit6_mini/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2",
+                "${workspaceFolder}/h743vit6_mini/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F",
+                "${workspaceFolder}/h743vit6_mini/Drivers/CMSIS/Device/ST/STM32H7xx/Include",
+                "${workspaceFolder}/h743vit6_mini/Drivers/CMSIS/Include",
+                "${workspaceFolder}/component/**",
+                "${workspaceFolder}/ThirdParty/**"
+            ],
+            "defines": [
+                "DEBUG",
+                "USE_HAL_DRIVER",
+                "STM32H743xx",
+                "STM32H7"
+            ],
+            "compilerPath": "arm-none-eabi-gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-arm",
+            "compileCommands": "${workspaceFolder}/h743vit6_mini/build/compile_commands.json"
+        },
+        {
+            "name": "STM32H753",
+            "includePath": [
+                "${workspaceFolder}/h753_alitek/Core/Inc",
+                "${workspaceFolder}/h753_alitek/Drivers/STM32H7xx_HAL_Driver/Inc",
+                "${workspaceFolder}/h753_alitek/Drivers/STM32H7xx_HAL_Driver/Inc/Legacy",
+                "${workspaceFolder}/h753_alitek/Middlewares/Third_Party/FreeRTOS/Source/include",
+                "${workspaceFolder}/h753_alitek/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2",
+                "${workspaceFolder}/h753_alitek/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F",
+                "${workspaceFolder}/h753_alitek/Drivers/CMSIS/Device/ST/STM32H7xx/Include",
+                "${workspaceFolder}/h753_alitek/Drivers/CMSIS/Include",
+                "${workspaceFolder}/component/**",
+                "${workspaceFolder}/ThirdParty/**"
+            ],
+            "defines": [
+                "DEBUG",
+                "USE_HAL_DRIVER",
+                "STM32H753xx",
+                "STM32H7"
+            ],
+            "compilerPath": "arm-none-eabi-gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-arm",
+            "compileCommands": "${workspaceFolder}/h753_alitek/build/compile_commands.json"
+        }
+    ],
+    "version": 4
+}

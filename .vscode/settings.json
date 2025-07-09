@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "stm32h753xx.h": "c",
+        "main.h": "c",
+        "stm32h7xx_hal_conf.h": "c",
+        "stm32h7xx_hal.h": "c",
+        "stm32h7xx_hal_uart.h": "c",
+        "elog.h": "c",
+        "lcd.h": "c"
+    }
+}
