@@ -2,13 +2,52 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debug STM32F103 (ST-Link)",
+            "cwd": "${workspaceFolder}/f103zet6_big",
+            "executable": "${workspaceFolder}/f103zet6_big/build/f103zet6_big.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f1x.cfg"
+            ],
+            "searchDir": [],
+            "openOCDLaunchCommands": [
+                "init",
+                "reset halt"
+            ],
+            "svdFile": "${workspaceFolder}/.vscode/svd/STM32F103.svd",
+            "preLaunchTask": "Build F103",
+            "postLaunchCommands": [
+                "monitor reset halt",
+                "break main",
+                "continue"
+            ],
+            "rtos": "FreeRTOS",
+            "showDevDebugOutput": "parsed",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 72000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "type": "console",
+                        "label": "ITM",
+                        "port": 0
+                    }
+                ]
+            }
+        },
+        {
             "name": "Debug STM32F411 (CMSIS-DAP)",
             "cwd": "${workspaceFolder}/f411ceu6_nano",
             "executable": "${workspaceFolder}/f411ceu6_nano/build/f411ceu6_nano.elf",
             "request": "launch",
             "type": "cortex-debug",
             "runToEntryPoint": "main",
-            "showDevDebugOutput": "parsed",
             "servertype": "openocd",
             "configFiles": [
                 "interface/cmsis-dap.cfg",
@@ -25,7 +64,22 @@
                 "monitor reset halt",
                 "break main",
                 "continue"
-            ]
+            ],
+            "rtos": "FreeRTOS",
+            "showDevDebugOutput": "parsed",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 72000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "type": "console",
+                        "label": "ITM",
+                        "port": 0
+                    }
+                ]
+            }
         },
         {
             "name": "Debug STM32H743 (ST-Link)",
@@ -34,7 +88,6 @@
             "request": "launch",
             "type": "cortex-debug",
             "runToEntryPoint": "main",
-            "showDevDebugOutput": "parsed",
             "servertype": "openocd",
             "configFiles": [
                 "interface/stlink.cfg",
@@ -51,7 +104,22 @@
                 "monitor reset halt",
                 "break main",
                 "continue"
-            ]
+            ],
+            "rtos": "FreeRTOS",
+            "showDevDebugOutput": "parsed",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 72000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "type": "console",
+                        "label": "ITM",
+                        "port": 0
+                    }
+                ]
+            }
         },
         {
             "name": "Debug STM32H753 (ST-Link)",
@@ -60,7 +128,6 @@
             "request": "launch",
             "type": "cortex-debug",
             "runToEntryPoint": "main",
-            "showDevDebugOutput": "parsed",
             "servertype": "openocd",
             "configFiles": [
                 "interface/stlink.cfg",
@@ -88,7 +155,22 @@
                 "monitor reset halt",
                 "load",
                 "monitor reset halt"
-            ]
+            ],
+            "rtos": "FreeRTOS",
+            "showDevDebugOutput": "parsed",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 72000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "type": "console",
+                        "label": "ITM",
+                        "port": 0
+                    }
+                ]
+            }
         },
         {
             "name": "Debug STM32H753 (No Flash)",
@@ -97,7 +179,6 @@
             "request": "launch",
             "type": "cortex-debug",
             "runToEntryPoint": "main",
-            "showDevDebugOutput": "parsed",
             "servertype": "openocd",
             "configFiles": [
                 "interface/stlink.cfg",
@@ -115,7 +196,37 @@
                 "monitor reset halt",
                 "break main",
                 "continue"
-            ]
+            ],
+            "rtos": "FreeRTOS",
+            "showDevDebugOutput": "parsed",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 72000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "type": "console",
+                        "label": "ITM",
+                        "port": 0
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Attach STM32F103 (Running)",
+            "cwd": "${workspaceFolder}/f103zet6_big",
+            "executable": "${workspaceFolder}/f103zet6_big/build/f103zet6_big.elf",
+            "request": "attach",
+            "type": "cortex-debug",
+            "showDevDebugOutput": "parsed",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f1x.cfg"
+            ],
+            "searchDir": [],
+            "svdFile": "${workspaceFolder}/.vscode/svd/STM32F103.svd"
         },
         {
             "name": "Attach STM32F411 (Running)",
@@ -169,7 +280,6 @@
             "request": "launch",
             "type": "cortex-debug",
             "runToEntryPoint": "main",
-            "showDevDebugOutput": "parsed",
             "servertype": "openocd",
             "configFiles": [
                 "interface/stlink.cfg",
@@ -186,7 +296,22 @@
                 "monitor sleep 200",
                 "break main",
                 "continue"
-            ]
+            ],
+            "rtos": "FreeRTOS",
+            "showDevDebugOutput": "parsed",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 72000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "type": "console",
+                        "label": "ITM",
+                        "port": 0
+                    }
+                ]
+            }
         },
         {
             "name": "Debug STM32H753 (Connect Under Reset)",
@@ -195,7 +320,6 @@
             "request": "launch",
             "type": "cortex-debug",
             "runToEntryPoint": "main",
-            "showDevDebugOutput": "parsed",
             "servertype": "openocd",
             "configFiles": [
                 "interface/stlink.cfg",
@@ -212,7 +336,22 @@
                 "monitor sleep 200",
                 "break main",
                 "continue"
-            ]
+            ],
+            "rtos": "FreeRTOS",
+            "showDevDebugOutput": "parsed",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 72000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "type": "console",
+                        "label": "ITM",
+                        "port": 0
+                    }
+                ]
+            }
         },
         {
             "name": "Debug STM32H753 (Custom Config)",
@@ -221,7 +360,6 @@
             "request": "launch",
             "type": "cortex-debug",
             "runToEntryPoint": "main",
-            "showDevDebugOutput": "parsed",
             "servertype": "openocd",
             "configFiles": [
                 "${workspaceFolder}/.vscode/openocd-h753-custom.cfg"
@@ -231,7 +369,22 @@
             "postLaunchCommands": [
                 "break main",
                 "continue"
-            ]
+            ],
+            "rtos": "FreeRTOS",
+            "showDevDebugOutput": "parsed",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 72000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "type": "console",
+                        "label": "ITM",
+                        "port": 0
+                    }
+                ]
+            }
         }
     ]
 }

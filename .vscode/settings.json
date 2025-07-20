@@ -6,6 +6,16 @@
         "stm32h7xx_hal.h": "c",
         "stm32h7xx_hal_uart.h": "c",
         "elog.h": "c",
-        "lcd.h": "c"
-    }
+        "lcd.h": "c",
+        "bit": "c",
+        "compare": "c",
+        "cstdlib": "c",
+        "cmath": "c",
+        "new": "c",
+        "type_traits": "c",
+        "typeinfo": "c",
+        "*.bak": "c",
+        "stdio.h": "c"
+    },
+    "mcu-debug.rtos-views.showRTOS": true
 }

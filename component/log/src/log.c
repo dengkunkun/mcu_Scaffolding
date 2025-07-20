@@ -7,22 +7,10 @@ int log_init(void)
     for (int level = ELOG_LVL_ASSERT; level <= ELOG_LVL_VERBOSE; level++)
     {
         elog_set_fmt(level, ELOG_FMT_LVL | ELOG_FMT_TAG | ELOG_FMT_TIME |
-                                ELOG_FMT_DIR  | ELOG_FMT_LINE);
+                                ELOG_FMT_DIR | ELOG_FMT_LINE);
     }
     // 启动日志输出
-    log_start();
-
-    return 0; // 成功
-}
-
-/**
- * @brief 启动日志输出
- */
-void log_start(void)
-{
-    // 启动EasyLogger
     elog_start();
 
-    // 打印初始化成功信息
-    logi("Log system initialized successfully.");
+    return 0; // 成功
 }

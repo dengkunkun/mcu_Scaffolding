@@ -2,6 +2,27 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Build F103",
+            "type": "shell",
+            "command": "./build.sh",
+            "args": ["f103"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
             "label": "Build F411",
             "type": "shell",
             "command": "./build.sh",
@@ -51,6 +72,27 @@
             "type": "shell",
             "command": "./build.sh",
             "args": ["h753"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Rebuild F103",
+            "type": "shell",
+            "command": "./build.sh",
+            "args": ["f103", "-r"],
             "group": "build",
             "presentation": {
                 "echo": true,
@@ -131,6 +173,24 @@
             ]
         },
         {
+            "label": "Flash F103",
+            "type": "shell",
+            "command": "./build.sh",
+            "args": ["f103", "-f"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
             "label": "Flash F411",
             "type": "shell",
             "command": "./build.sh",
@@ -190,7 +250,7 @@
             "command": "bash",
             "args": [
                 "-c",
-                "rm -rf f411ceu6_nano/build h743vit6_mini/build h753_alitek/build"
+                "rm -rf f103zet6_big/build f411ceu6_nano/build h743vit6_mini/build h753_alitek/build"
             ],
             "group": "build",
             "presentation": {

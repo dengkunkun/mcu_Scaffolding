@@ -7,6 +7,9 @@
 #elif defined(STM32H7) || defined(STM32H7xx) || defined(STM32H743xx) || defined(STM32H753xx)
 #pragma message("use STM32H7 family HAL")
 #include "stm32h7xx_hal.h"
+#elif defined(STM32F1) || defined(STM32F103xE)
+#pragma message("use STM32F1 family HAL")
+#include "stm32f1xx_hal.h"
 #else
 #error "Unknown STM32 family, HAL header not included"
 #endif
@@ -16,7 +19,7 @@ void shell_update(void)
 {
     extern UART_HandleTypeDef huart1;
     static uint8_t input_buffer[LWSHELL_INPUT_BUFFER_SIZE];
-    if(HAL_UART_Receive_IT(&huart1, input_buffer,LWSHELL_INPUT_BUFFER_SIZE)!=HAL_OK)
+    if (HAL_UART_Receive_IT(&huart1, input_buffer, LWSHELL_INPUT_BUFFER_SIZE) != HAL_OK)
     {
         /* Error handling */
         loge("Error receiving data\r\n");
@@ -49,5 +52,4 @@ void shell_init(void)
     /* User input to process every character */
 
     /* Now insert input */
-    
 }

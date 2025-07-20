@@ -59,7 +59,7 @@ target_include_directories(${LOG_COMPONENT_NAME} PUBLIC
 # )
 
 # 条件编译：如果需要异步输出
-option(ELOG_ASYNC_ENABLE "Enable EasyLogger async output" OFF)
+option(ELOG_ASYNC_ENABLE "Enable EasyLogger async output" ON)
 if(ELOG_ASYNC_ENABLE)
     target_sources(${LOG_COMPONENT_NAME} PRIVATE
         ../../ThirdParty/EasyLogger/easylogger/src/elog_async.c

@@ -14,6 +14,10 @@ FLASH_ONLY=false
 # 解析命令行参数
 while [[ $# -gt 0 ]]; do
     case $1 in
+        f103|F103)
+            MCU_TYPE="f103"
+            shift
+            ;;
         f411|F411)
             MCU_TYPE="f411"
             shift
@@ -69,6 +73,13 @@ fi
 
 # 根据MCU类型设置配置
 case $MCU_TYPE in
+    f103)
+        PROJECT_DIR="f103zet6_big"
+        PROJECT_NAME="f103zet6_big"
+        OPENOCD_INTERFACE="interface/stlink.cfg"
+        OPENOCD_TARGET="target/stm32f1x.cfg"
+        echo "=== 构建STM32F103ZET6项目 ==="
+        ;;
     f411)
         PROJECT_DIR="f411ceu6_nano"
         PROJECT_NAME="f411ceu6_nano"
@@ -154,7 +165,7 @@ else
     arm-none-eabi-size ${PROJECT_NAME}.elf
     echo ""
     echo "生成的文件:"
-    ls -la ${PROJECT_NAME}.elf ${PROJECT_NAME}.hex ${PROJECT_NAME}.bin
+    ls -lah ${PROJECT_NAME}.elf ${PROJECT_NAME}.hex ${PROJECT_NAME}.bin
     echo ""
 
     # 返回到项目根目录

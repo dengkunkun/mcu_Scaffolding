@@ -25,28 +25,75 @@
  * Function: Portable interface for each platform.
  * Created on: 2015-04-28
  */
-#include <stdio.h>
+
 #include <elog.h>
+#include <stdio.h>
+#include "cmsis_os2.h"
+
 #if defined(STM32F4) || defined(STM32F411xE)
 #pragma message("use STM32F4 family HAL")
 #include "stm32f4xx_hal.h"
 #elif defined(STM32H7) || defined(STM32H7xx) || defined(STM32H743xx) || defined(STM32H753xx)
 #pragma message("use STM32H7 family HAL")
 #include "stm32h7xx_hal.h"
+#elif defined(STM32F1) || defined(STM32F103xE)
+#pragma message("use STM32F1 family HAL")
+#include "stm32f1xx_hal.h"
 #else
 #error "Unknown STM32 family, HAL header not included"
 #endif
+extern UART_HandleTypeDef huart1;
 
+static void elog_entry(void *para);
+/* Definitions for elog */
+osThreadId_t elogTaskHandle;
+const osThreadAttr_t elogTask_attributes = {
+    .name = "elogTask",
+    .stack_size = 128 * 4,
+    .priority = (osPriority_t)osPriorityLow,
+};
+/* Definitions for elog_lock */
+osSemaphoreId_t elog_lockHandle;
+const osSemaphoreAttr_t elog_lock_attributes = {
+    .name = "elog_lock"};
+/* Definitions for elog_async */
+osSemaphoreId_t elog_asyncHandle;
+const osSemaphoreAttr_t elog_async_attributes = {
+    .name = "elog_async"};
+/* Definitions for elog_dma_lock */
+osSemaphoreId_t elog_dma_lockHandle;
+const osSemaphoreAttr_t elog_dma_lock_attributes = {
+    .name = "elog_dma_lock"};
+
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if (huart->Instance == huart1.Instance)
+    {
+        extern osSemaphoreId_t elog_dma_lockHandle;
+        osSemaphoreRelease(elog_dma_lockHandle);
+    }
+}
 /**
  * EasyLogger port initialize
  *
  * @return result
  */
-ElogErrCode elog_port_init(void) {
+ElogErrCode elog_port_init(void)
+{
     ElogErrCode result = ELOG_NO_ERR;
 
     /* add your code here */
-    
+    elog_lockHandle = osSemaphoreNew(1, 1, &elog_lock_attributes);
+
+    /* creation of elog_async */
+    elog_asyncHandle = osSemaphoreNew(1, 1, &elog_async_attributes);
+
+    /* creation of elog_dma_lock */
+    elog_dma_lockHandle = osSemaphoreNew(1, 1, &elog_dma_lock_attributes);
+
+    /* creation of elog */
+    elogTaskHandle = osThreadNew(elog_entry, NULL, &elogTask_attributes);
+
     return result;
 }
 
@@ -54,10 +101,8 @@ ElogErrCode elog_port_init(void) {
  * EasyLogger port deinitialize
  *
  */
-void elog_port_deinit(void) {
-
-    /* add your code here */
-
+void elog_port_deinit(void)
+{
 }
 
 /**
@@ -66,29 +111,26 @@ void elog_port_deinit(void) {
  * @param log output of log
  * @param size log size
  */
-void elog_port_output(const char *log, size_t size) {
-extern UART_HandleTypeDef huart1;
-    HAL_UART_Transmit(&huart1, (uint8_t*)log, size, HAL_MAX_DELAY);
-    /* add your code here */
-    
+void elog_port_output(const char *log, size_t size)
+{
+    HAL_UART_Transmit_DMA(&huart1, (uint8_t *)log, size);
+    osSemaphoreAcquire(elog_dma_lockHandle, osWaitForever);
 }
 
 /**
  * output lock
  */
-void elog_port_output_lock(void) {
-    
-    /* add your code here */
-    
+void elog_port_output_lock(void)
+{
+    osSemaphoreAcquire(elog_lockHandle, osWaitForever);
 }
 
 /**
  * output unlock
  */
-void elog_port_output_unlock(void) {
-    
-    /* add your code here */
-    
+void elog_port_output_unlock(void)
+{
+    osSemaphoreRelease(elog_lockHandle);
 }
 
 /**
@@ -96,13 +138,11 @@ void elog_port_output_unlock(void) {
  *
  * @return current time
  */
-const char *elog_port_get_time(void) {
-    
-    static char time_str[32];
-    uint32_t time = HAL_GetTick(); // Get the current tick count in milliseconds
-    snprintf(time_str, sizeof(time_str), "%lu", time); // Convert to string
-    return time_str; // Return the string representation of the time
-    
+const char *elog_port_get_time(void)
+{
+    static char cur_system_time[16] = "";
+    snprintf(cur_system_time, 16, "%lu", osKernelGetTickCount());
+    return cur_system_time;
 }
 
 /**
@@ -110,10 +150,9 @@ const char *elog_port_get_time(void) {
  *
  * @return current process name
  */
-const char *elog_port_get_p_info(void) {
-    
-    return "STM32F4"; // Return a static string representing the process name
-    
+const char *elog_port_get_p_info(void)
+{
+    return "";
 }
 
 /**
@@ -121,8 +160,45 @@ const char *elog_port_get_p_info(void) {
  *
  * @return current thread name
  */
-const char *elog_port_get_t_info(void) {
-    
-    return "MainThread"; // Return a static string representing the thread name
-    
+const char *elog_port_get_t_info(void)
+{
+    return "";
+}
+
+void elog_async_output_notice(void)
+{
+    osSemaphoreRelease(elog_asyncHandle);
+}
+
+static void elog_entry(void *para)
+{
+    size_t get_log_size = 0;
+#ifdef ELOG_ASYNC_LINE_OUTPUT
+    static char poll_get_buf[ELOG_LINE_BUF_SIZE - 4];
+#else
+    static char poll_get_buf[ELOG_ASYNC_OUTPUT_BUF_SIZE - 4];
+#endif
+
+    for (;;)
+    {
+        /* waiting log */
+        osSemaphoreAcquire(elog_asyncHandle, osWaitForever);
+        /* polling gets and outputs the log */
+        while (1)
+        {
+#ifdef ELOG_ASYNC_LINE_OUTPUT
+            get_log_size = elog_async_get_line_log(poll_get_buf, sizeof(poll_get_buf));
+#else
+            get_log_size = elog_async_get_log(poll_get_buf, sizeof(poll_get_buf));
+#endif
+            if (get_log_size)
+            {
+                elog_port_output(poll_get_buf, get_log_size);
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
 }
