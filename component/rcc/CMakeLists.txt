@@ -1,23 +1,42 @@
-# RCC Component CMake Configuration
+cmake_minimum_required(VERSION 3.22)
 
-# Define component name
+# 引入通用组件配置
+include(../ComponentConfig.cmake)
+
+# 设置项目名称
 set(RCC_COMPONENT_NAME rcc)
 
-# Add all source files in src directory
-file(GLOB RCC_SOURCES 
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c
+# 创建静态库目标
+add_library(${RCC_COMPONENT_NAME} STATIC)
+
+# 设置源文件
+file(GLOB RCC_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c)
+target_sources(${RCC_COMPONENT_NAME} PRIVATE ${RCC_SOURCES})
+
+# 设置头文件包含路径
+target_include_directories(${RCC_COMPONENT_NAME} 
+    PUBLIC 
+        include
+    PRIVATE
+        .
 )
 
-# Create a library target for RCC component
-add_library(${RCC_COMPONENT_NAME} STATIC ${RCC_SOURCES})
+# 获取并链接组件依赖
+get_component_dependencies(rcc RCC_DEPS)
+if(RCC_DEPS)
+    target_link_libraries(${RCC_COMPONENT_NAME} PRIVATE ${RCC_DEPS})
+endif()
 
-# Add include directories for this component
-target_include_directories(${RCC_COMPONENT_NAME} PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
+# 链接STM32 HAL库
+link_stm32_hal(${RCC_COMPONENT_NAME})
+
+# 设置通用编译选项和属性
+set_component_compile_options(${RCC_COMPONENT_NAME})
+set_component_properties(${RCC_COMPONENT_NAME} RCC)
+
+# 设置额外的目标属性
+set_target_properties(${RCC_COMPONENT_NAME} PROPERTIES
+    INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/include"
+    DESCRIPTION "RCC clock configuration component"
+    VERSION "1.0.0"
 )
-
-# If this component depends on STM32 HAL, you can add it here
-target_link_libraries(${RCC_COMPONENT_NAME} PRIVATE stm32cubemx)
-
-# Export the library name for parent CMakeLists.txt
-set(RCC_LIBRARY ${RCC_COMPONENT_NAME} PARENT_SCOPE)
