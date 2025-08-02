@@ -19,3 +19,6 @@
 [submodule "ThirdParty/lwutil"]
 	path = ThirdParty/lwutil
 	url = https://github.com/MaJerle/lwutil.git
+[submodule "ThirdParty/Unity"]
+	path = ThirdParty/Unity
+	url = https://github.com/ThrowTheSwitch/Unity.git

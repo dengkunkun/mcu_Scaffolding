@@ -27,7 +27,7 @@ typedef struct
 
 // 全局worker控制结构
 static worker_control_t g_worker = {
-    .magic = 0,
+    .magic = WORKER_MAGIC,
     .state = WORKER_STATE_STOPPED,
     .shutdown_requested = false,
     .flush_requested = false};
@@ -103,16 +103,11 @@ static void worker_thread_function(void *param)
 
 int worker_thread_init(int item_num, int stack_size, int prior)
 {
-    if (g_worker.magic == WORKER_MAGIC)
-    {
-        return -1; // 已经初始化
-    }
-
     // 创建工作队列
     g_worker.work_queue = xQueueCreate(item_num, sizeof(worker_queue_item_t));
     if (!g_worker.work_queue)
     {
-        return -1;
+        return -2;
     }
 
     // 创建刷新信号量
@@ -120,7 +115,7 @@ int worker_thread_init(int item_num, int stack_size, int prior)
     if (!g_worker.flush_sem)
     {
         vQueueDelete(g_worker.work_queue);
-        return -1;
+        return -3;
     }
 
     // 创建工作线程
@@ -136,7 +131,7 @@ int worker_thread_init(int item_num, int stack_size, int prior)
     {
         vQueueDelete(g_worker.work_queue);
         vSemaphoreDelete(g_worker.flush_sem);
-        return -1;
+        return -4;
     }
 
     // 初始化状态
@@ -150,6 +145,12 @@ int worker_thread_init(int item_num, int stack_size, int prior)
     return 0;
 }
 
+int worker_thread_init_help(void *arg)
+{
+    return worker_thread_init(16, 256 * 4, 3);
+}
+#include "periph_init.h"
+PERIPH_INIT_REGISTER("worker_thread_init", 200, worker_thread_init_help, NULL);
 int worker_thread_destroy(void)
 {
     if (g_worker.magic != WORKER_MAGIC)

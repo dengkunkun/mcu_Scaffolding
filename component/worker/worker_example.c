@@ -11,7 +11,7 @@
 #include "task.h"
 #include <stdio.h>
 #include <string.h>
-
+#include <stdbool.h>
 // 示例数据结构
 typedef struct
 {

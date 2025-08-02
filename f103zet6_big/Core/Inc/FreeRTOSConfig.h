@@ -45,6 +45,9 @@
 /* USER CODE BEGIN Includes */
 /* Section where include file can be added */
 #define configCHECK_FOR_STACK_OVERFLOW 2 // 启用更严格的栈溢出检查
+// #define INCLUDE_xTaskGetIdleTaskHandle 1
+// #define INCLUDE_pxTaskGetStackStart 1
+// #define configTOTAL_HEAP_SIZE ((size_t)(20 * 1024))
 /* USER CODE END Includes */
 
 /* Ensure definitions are only used by the compiler, and not by the assembler. */
@@ -64,8 +67,8 @@ extern uint32_t SystemCoreClock;
 #define configCPU_CLOCK_HZ (SystemCoreClock)
 #define configTICK_RATE_HZ ((TickType_t)1000)
 #define configMAX_PRIORITIES (56)
-#define configMINIMAL_STACK_SIZE ((uint16_t)256)    // 增加idle任务栈大小到256 words (1KB)
-#define configTOTAL_HEAP_SIZE ((size_t)(20 * 1024)) // 增加堆大小到20KB
+#define configMINIMAL_STACK_SIZE ((uint16_t)128)
+#define configTOTAL_HEAP_SIZE ((size_t)24576)
 #define configMAX_TASK_NAME_LEN (16)
 #define configUSE_TRACE_FACILITY 1
 #define configUSE_16_BIT_TICKS 0
@@ -100,8 +103,6 @@ to exclude the API function. */
 #define INCLUDE_uxTaskGetStackHighWaterMark 1
 #define INCLUDE_xTaskGetCurrentTaskHandle 1
 #define INCLUDE_eTaskGetState 1
-#define INCLUDE_xTaskGetIdleTaskHandle 1
-#define INCLUDE_pxTaskGetStackStart 1
 
 /*
  * The CMSIS-RTOS V2 FreeRTOS wrapper is dependent on the heap implementation used
@@ -169,7 +170,7 @@ standard names. */
 
 /* 内存监控配置 */
 #define configUSE_MALLOC_FAILED_HOOK 1
-#define configCHECK_FOR_STACK_OVERFLOW 2
+// #define configCHECK_FOR_STACK_OVERFLOW 2
 
 /* 任务状态监控 */
 #define configUSE_TRACE_FACILITY 1

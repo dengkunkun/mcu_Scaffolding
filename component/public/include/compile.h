@@ -91,7 +91,7 @@ DECLARE_SECTION_SYMBOLS(config);
 
 /* ==================== 性能测试宏定义 ==================== */
 
-#include "stm32f1xx_hal.h"
+#include "hal.h"
 
 /**
  * @brief DWT（Data Watchpoint and Trace）初始化

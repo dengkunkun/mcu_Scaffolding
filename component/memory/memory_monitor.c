@@ -220,7 +220,7 @@ void memory_print_report(void)
     logi("  Global vars(.data):\t\t%lu bytes", info.data_size);
     logi("  Global vars(.bss):\t\t%lu bytes", info.bss_size);
     logi("  freertos Heap used:\t\t%lu bytes", info.freertos_heap_used);
-    logi("  freertos sHeap free:\t\t%lu bytes", info.freertos_heap_free);
+    logi("  freertos Heap free:\t\t%lu bytes", info.freertos_heap_free);
     logi("  Stack used:\t\t%lu bytes (current task)", info.stack_used);
     logi("  Free RAM:\t\t%lu bytes (%.1f KB)",
          info.free_ram, info.free_ram / 1024.0f);

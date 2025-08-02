@@ -15,7 +15,13 @@
         "type_traits": "c",
         "typeinfo": "c",
         "*.bak": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "assert.h": "c",
+        "freertosconfig.h": "c",
+        "task.h": "c",
+        "periph_init.h": "c",
+        "stdbool.h": "c",
+        "elog_cfg.h": "c"
     },
     "mcu-debug.rtos-views.showRTOS": true
 }

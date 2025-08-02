@@ -1,4 +1,4 @@
-#include "stm32f4xx_hal.h"
+#include "hal.h"
 #include "main.h"
 #include "stdio.h"
 #include "string.h"
@@ -14,75 +14,75 @@ void PrintSystemClockInfo(void)
   char clock_source_str[32];
   char pll_source_str[16];
   char voltage_str[32];
-  
+
   // 获取各种时钟频率
   sysclk_freq = HAL_RCC_GetSysClockFreq();
   hclk_freq = HAL_RCC_GetHCLKFreq();
   pclk1_freq = HAL_RCC_GetPCLK1Freq();
   pclk2_freq = HAL_RCC_GetPCLK2Freq();
-  
+
   // 获取系统时钟源
   sysclk_source = __HAL_RCC_GET_SYSCLK_SOURCE();
-  switch(sysclk_source)
+  switch (sysclk_source)
   {
-    case RCC_SYSCLKSOURCE_STATUS_HSI:
-      strcpy(clock_source_str, "HSI");
-      break;
-    case RCC_SYSCLKSOURCE_STATUS_HSE:
-      strcpy(clock_source_str, "HSE");
-      break;
-    case RCC_SYSCLKSOURCE_STATUS_PLLCLK:
-      strcpy(clock_source_str, "PLL");
-      // 获取PLL源
-      pll_source = __HAL_RCC_GET_PLL_OSCSOURCE();
-      if(pll_source == RCC_PLLSOURCE_HSI)
-      {
-        strcpy(pll_source_str, "(HSI)");
-      }
-      else if(pll_source == RCC_PLLSOURCE_HSE)
-      {
-        strcpy(pll_source_str, "(HSE)");
-      }
-      else
-      {
-        strcpy(pll_source_str, "(Unknown)");
-      }
-      strcat(clock_source_str, pll_source_str);
-      break;
-    default:
-      strcpy(clock_source_str, "Unknown");
-      break;
+  case RCC_SYSCLKSOURCE_STATUS_HSI:
+    strcpy(clock_source_str, "HSI");
+    break;
+  case RCC_SYSCLKSOURCE_STATUS_HSE:
+    strcpy(clock_source_str, "HSE");
+    break;
+  case RCC_SYSCLKSOURCE_STATUS_PLLCLK:
+    strcpy(clock_source_str, "PLL");
+    // 获取PLL源
+    pll_source = __HAL_RCC_GET_PLL_OSCSOURCE();
+    if (pll_source == RCC_PLLSOURCE_HSI)
+    {
+      strcpy(pll_source_str, "(HSI)");
+    }
+    else if (pll_source == RCC_PLLSOURCE_HSE)
+    {
+      strcpy(pll_source_str, "(HSE)");
+    }
+    else
+    {
+      strcpy(pll_source_str, "(Unknown)");
+    }
+    strcat(clock_source_str, pll_source_str);
+    break;
+  default:
+    strcpy(clock_source_str, "Unknown");
+    break;
   }
-  
+
   // 获取电压缩放等级
   voltage_scale = HAL_PWREx_GetVoltageRange();
-  switch(voltage_scale)
+  switch (voltage_scale)
   {
-    case PWR_REGULATOR_VOLTAGE_SCALE1:
-      strcpy(voltage_str, "Scale 1 (High Performance)");
-      break;
-    case PWR_REGULATOR_VOLTAGE_SCALE2:
-      strcpy(voltage_str, "Scale 2 (Medium Performance)");
-      break;
-    case PWR_REGULATOR_VOLTAGE_SCALE3:
-      strcpy(voltage_str, "Scale 3 (Low Power)");
-      break;
-    default:
-      strcpy(voltage_str, "Unknown Scale");
-      break;
+  case PWR_REGULATOR_VOLTAGE_SCALE1:
+    strcpy(voltage_str, "Scale 1 (High Performance)");
+    break;
+  case PWR_REGULATOR_VOLTAGE_SCALE2:
+    strcpy(voltage_str, "Scale 2 (Medium Performance)");
+    break;
+  case PWR_REGULATOR_VOLTAGE_SCALE3:
+    strcpy(voltage_str, "Scale 3 (Low Power)");
+    break;
+  default:
+    strcpy(voltage_str, "Unknown Scale");
+    break;
   }
-  
+
   // 打印所有信息
   printf("\r\n========== System Clock Information ==========\r\n");
   printf("Clock Source    : %s\r\n", clock_source_str);
-  printf("SYSCLK Frequency: %lu Hz (%.2f MHz)\r\n", sysclk_freq, (float)sysclk_freq/1000000.0f);
-  printf("HCLK Frequency  : %lu Hz (%.2f MHz)\r\n", hclk_freq, (float)hclk_freq/1000000.0f);
-  printf("PCLK1 Frequency : %lu Hz (%.2f MHz)\r\n", pclk1_freq, (float)pclk1_freq/1000000.0f);
-  printf("PCLK2 Frequency : %lu Hz (%.2f MHz)\r\n", pclk2_freq, (float)pclk2_freq/1000000.0f);
+  printf("SYSCLK Frequency: %lu Hz (%.2f MHz)\r\n", sysclk_freq, (float)sysclk_freq / 1000000.0f);
+  printf("HCLK Frequency  : %lu Hz (%.2f MHz)\r\n", hclk_freq, (float)hclk_freq / 1000000.0f);
+  printf("PCLK1 Frequency : %lu Hz (%.2f MHz)\r\n", pclk1_freq, (float)pclk1_freq / 1000000.0f);
+  printf("PCLK2 Frequency : %lu Hz (%.2f MHz)\r\n", pclk2_freq, (float)pclk2_freq / 1000000.0f);
   printf("Voltage Scale   : %s\r\n", voltage_str);
-  
+
   // 检查电压调节器状态
-  if(__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY))
+  if (__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY))
   {
     printf("Voltage Status  : Ready\r\n");
   }
@@ -90,9 +90,9 @@ void PrintSystemClockInfo(void)
   {
     printf("Voltage Status  : Not Ready\r\n");
   }
-  
+
   // 如果使用PLL，显示PLL配置
-  if(sysclk_source == RCC_SYSCLKSOURCE_STATUS_PLLCLK)
+  if (sysclk_source == RCC_SYSCLKSOURCE_STATUS_PLLCLK)
   {
     printf("PLL Configuration:\r\n");
     printf("  PLLM: %lu\r\n", (RCC->PLLCFGR & RCC_PLLCFGR_PLLM) >> RCC_PLLCFGR_PLLM_Pos);
@@ -100,7 +100,7 @@ void PrintSystemClockInfo(void)
     printf("  PLLP: %lu\r\n", ((RCC->PLLCFGR & RCC_PLLCFGR_PLLP) >> RCC_PLLCFGR_PLLP_Pos) + 1);
     printf("  PLLQ: %lu\r\n", (RCC->PLLCFGR & RCC_PLLCFGR_PLLQ) >> RCC_PLLCFGR_PLLQ_Pos);
   }
-  
+
   printf("==============================================\r\n\r\n");
 }
 
@@ -138,7 +138,7 @@ static void SystemClockHSI_Config(int m, int n, int p, int q)
   // {
   //   Error_Handler();
   // }
-  if(HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
+  if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
@@ -164,7 +164,7 @@ static void SystemClockHSI_Config(int m, int n, int p, int q)
   //   /* Initialization Error */
   //   Error_Handler();
   // }
-  if(PWR_REGULATOR_VOLTAGE_SCALE1!=HAL_PWREx_GetVoltageRange())
+  if (PWR_REGULATOR_VOLTAGE_SCALE1 != HAL_PWREx_GetVoltageRange())
   {
     /* Initialization Error */
     Error_Handler();
@@ -200,7 +200,7 @@ static void SystemClockHSEbypass_Config(int m, int n, int p, int q)
     /* Initialization Error */
     Error_Handler();
   }
-  if(HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE3) != HAL_OK)
+  if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE3) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
@@ -228,7 +228,7 @@ static void SystemClockHSEbypass_Config(int m, int n, int p, int q)
     /* Initialization Error */
     Error_Handler();
   }
-  if(PWR_REGULATOR_VOLTAGE_SCALE3!=HAL_PWREx_GetVoltageRange())
+  if (PWR_REGULATOR_VOLTAGE_SCALE3 != HAL_PWREx_GetVoltageRange())
   {
     /* Initialization Error */
     Error_Handler();
@@ -249,7 +249,7 @@ void SwitchSystemClock(void)
     /* Set SYSCLK frequency to 80000000 Hz, coming from the PLL which is clocked by HSI */
     SystemClockHSI_Config(8, 100, 4, 4);
   }
-  
+
   /* reset global variable */
   SwitchClock = RESET;
 }

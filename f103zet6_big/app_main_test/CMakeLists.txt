@@ -8,8 +8,8 @@ add_component_subdirectory()
 add_third_party_subdirectory()
 
 component_register(
-    COMPONENT_NAME app_main
-    REQUIRES stm32cubemx log uart shell public memory worker
+    COMPONENT_NAME app_main_test
+    REQUIRES stm32cubemx public worker unity
 )
 
-add_version_info_macros(app_main)
+add_version_info_macros(app_main_test)

@@ -11,14 +11,8 @@
 #include "version_info.h" // 添加版本信息头文件
 #include "worker.h"
 #include "compile.h"
+#include "uart.h"
 #include "memory_sections.h" // 添加内存段管理头文件
-
-int _write(int file, char *ptr, int len)
-{
-    (void)file; // Suppress unused parameter warning
-    HAL_UART_Transmit(&huart1, (uint8_t *)ptr, len, HAL_MAX_DELAY);
-    return len;
-}
 
 #define LED_RED_TOGGLE() HAL_GPIO_TogglePin(led_red_GPIO_Port, led_red_Pin)
 #define LED_BLUE_TOGGLE() HAL_GPIO_TogglePin(led_blue_GPIO_Port, led_blue_Pin)
@@ -194,8 +188,8 @@ RAMFUNC void ram_func_test()
     });
 }
 int app_main(void)
-
 {
+    int ret;
     // 首先初始化内存段 - 这必须在任何RAM函数被调用之前执行
     memory_sections_init();
 
@@ -218,11 +212,12 @@ int app_main(void)
     logi("=== System Memory Report at Startup ===");
     memory_print_report();
 
-    ram_func_test();
+    // ram_func_test();  //内部ram比内部flash快14%
 
     logi("=== Application Main Loop Started ===");
-    if (worker_thread_init(16, 2048, 4) != 0)
+    if ((ret = worker_thread_init(16, 2048, 4)) != 0)
     {
+        loge("worker_thread_init fail ret:%d", ret);
         error_handler("worker_thread_init fail");
     }
     uint32_t cycle_count = 0;
@@ -235,6 +230,7 @@ int app_main(void)
         cycle_count++;
         logi("Main loop cycle #%lu", cycle_count);
         LED_GREEN_TOGGLE();
+        // uart3_test();
     }
 }
 

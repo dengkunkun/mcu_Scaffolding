@@ -1,0 +1,39 @@
+获取片内ram容量接口
+获取片内flash容量接口
+串口中断/dma收发：ringbuf
+中断处理中异步打印日志
+gpio中断：按键库移植
+看门狗：lwwdg
+定时器：驱动led闪烁库 
+pwm：渐变led库
+
+posix接口移植
+	文件系统
+		sqlite
+	socket
+		AT-socket
+	
+
+xrtos
+live watch
+xperipherals
+
+c数据结构与算法库
+
+通过读取编译符号实现正确解析宏
+
+新的日志系统，通过id记录日志而不是字符串，由上位机进行还原
+
+malloc和pvPortMalloc的性能对比
+
+lwxxx
+内部flash读写
+外置spi flash
+flashdb移植
+mcuboot移植
+
+pwm输入输出
+重构cmake，简化模块引用
+	保持组件结构固定，源文件在根目录下，对外的头文件在include下，测试的源文件和头文件都在test目录下
+单元测试
+

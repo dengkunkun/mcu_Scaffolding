@@ -57,8 +57,8 @@ _estack = ORIGIN(RAM) + LENGTH(RAM);    /* end of RAM */
 
 /* Generate a link error if heap and stack don't fit into RAM */
 /* 优化后的堆栈配置 - 基于实际使用情况调整 */
-_Min_Heap_Size = 0x800;     /* 8KB heap - 增加堆空间用于FreeRTOS和动态分配 */
-_Min_Stack_Size = 0x800;     /* 2KB stack - 增加主栈空间防止溢出 */
+_Min_Heap_Size = 0x800;      /* required amount of heap  */
+_Min_Stack_Size = 0x400; /* required amount of stack */
 
 /* 内存使用计算 (STM32F103ZET6 - 64KB RAM):
  * - Global variables (.data + .bss): ~11KB

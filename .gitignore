@@ -1,6 +1,7 @@
 # Build directories
 build/
 **/build/
+**/build_test/
 **/MDK-ARM/
 **/cmake/
 **/Drivers/
@@ -15,6 +16,8 @@ out/
 # !ThirdParty/**/*.patch
 temp
 component/bsp/
+
+tools/*.txt
 
 # CMake generated files
 CMakeCache.txt
@@ -45,6 +48,7 @@ Makefile
 *.so
 *.dll
 *.exe
+
 
 # Debug files
 *.d
